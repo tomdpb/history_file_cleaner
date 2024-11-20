@@ -27,9 +27,12 @@ func createRegexesFromFile(filename string) []regexp.Regexp {
 	return regexes
 }
 
-func checkLine(line string, regexes []regexp.Regexp) string {
+func checkLine(line string, regexes []regexp.Regexp, verbose bool) string {
 	for _, re := range regexes {
 		if re.MatchString(line) {
+			if verbose {
+				log.Println("Removed ", line)
+			}
 			return ""
 		}
 	}
@@ -37,8 +40,9 @@ func checkLine(line string, regexes []regexp.Regexp) string {
 }
 
 func main() {
-	filename := flag.String("file", "zhistory", "This is the file that will be modified")
+	filename := flag.String("file", "zhistory", "This is the file that will be modified.")
 	regexFile := flag.String("regexFile", "regex_patterns.txt", "This is the file that contains the regular expressions to be used.")
+	verbose := flag.Bool("verbose", false, "Setting to true will display what lines were removed.")
 	flag.Parse()
 
 	// create backup just in case
@@ -64,7 +68,7 @@ func main() {
 	}
 	for scanner.Scan() {
 		line := scanner.Text()
-		line = checkLine(line, regexes)
+		line = checkLine(line, regexes, *verbose)
 		if line == "" {
 			continue
 		} else {
