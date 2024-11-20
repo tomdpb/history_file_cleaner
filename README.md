@@ -7,4 +7,4 @@ Included in this repository is an example file containing regex patters which wo
 To pass a file to the program, call the compiled binary, and then pass the file name as an argument like so:
 `history_cleaner .zhistory`
 
-The program will look for `regex_patterns.txt` in the same directory as the binary, and will use it to determine which regeular expressions to delete from the file passed to it.
+The program will look for `regex_patterns.txt` in the same directory as the binary, and will use it to determine which regular expressions to delete from the file passed to it.
