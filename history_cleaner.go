@@ -2,10 +2,10 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"log"
 	"os"
-	"path/filepath"
 	"regexp"
 )
 
@@ -37,25 +37,23 @@ func checkLine(line string, regexes []regexp.Regexp) string {
 }
 
 func main() {
-	filename := os.Args[1]
+	filename := flag.String("file", "zhistory", "This is the file that will be modified")
+	regexFile := flag.String("regexFile", "regex_patterns.txt", "This is the file that contains the regular expressions to be used.")
+	flag.Parse()
+
 	// create backup just in case
-	backupFile := filename + ".bak"
-	os.Link(filename, backupFile)
-	os.Remove(filename)
+	backupFile := *filename + ".bak"
+	os.Link(*filename, backupFile)
+	os.Remove(*filename)
 	history, err := os.Open(backupFile)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer history.Close()
 
-	ex, err := os.Executable()
-	if err != nil {
-		log.Fatal(err)
-	}
-	regexFilePath := filepath.Dir(ex) + "/regex_patterns.txt"
-	regexes := createRegexesFromFile(regexFilePath)
+	regexes := createRegexesFromFile(*regexFile)
 
-	newHistory, err := os.Create(filename)
+	newHistory, err := os.Create(*filename)
 	if err != nil {
 		log.Fatal(err)
 	}
