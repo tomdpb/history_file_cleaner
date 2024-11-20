@@ -1,0 +1,6 @@
+cd*
+ls
+ll
+la
+cat*
+htop
