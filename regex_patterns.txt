@@ -1,6 +1,6 @@
 ^cd.*
-^ls
-^ll
-^la
+^ls$
+^ll$
+^la$
 ^cat.*?
-^htop.
+^htop$
