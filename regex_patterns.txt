@@ -1,6 +1,6 @@
-cd*
-ls
-ll
-la
-cat*
-htop
+^cd.*
+^ls
+^ll
+^la
+^cat.*?
+^htop.
