@@ -1,0 +1,9 @@
+cd Code/Go
+ls
+chmod +x file
+docker
+git status
+cd
+man man
+nvim
+bills
