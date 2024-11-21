@@ -4,10 +4,12 @@ This simple command line program will remove lines from a file given regex expre
 It's main intent is to be used with zhistory or bash_history and remove lines with `cd`, and variations of `ls`, though any valid regex can be used.
 Included in this repository is an example file containing regex patters which would be removed from a file. A backup of the file is made in case the user has any regrets or makes a mistake.
 
-To pass a file to the program, call the compiled binary, and then pass the file name as an argument like so:
-`history_cleaner .zhistory`
+To pass a file to the program, call the compiled binary, pass the file name as an argument, and finally pass a file containing the regex patterns like so:
+`history_cleaner --file=~/.zhistory --regexFile=regex_patterns.txt`
 
-The program will look for `regex_patterns.txt` in the same directory as the binary, and will use it to determine which regular expressions to delete from the file passed to it.
+The program will will use `regex_patterns.txt` (or whatever was passed to it) to determine which regular expressions to delete from the file passed to it.
+
+Finally, setting `--verbose=true` will also show which lines are being removed, but it is set to `false` by default.
 
 # Warning
 
